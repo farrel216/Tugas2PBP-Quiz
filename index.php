@@ -1,6 +1,6 @@
 <?php 
     require("questions.php");
-    isset($_GET['id']) ? $questionId = $_GET['id'] : $questionId = 0;
+    isset($_GET['id']) ? $questionId = $_GET['id'] : $questionId = 1;
 
 ?>
 <!DOCTYPE html>
