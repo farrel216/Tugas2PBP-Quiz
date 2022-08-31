@@ -1,12 +1,20 @@
 <?php 
+    session_start();
     require("questions.php");
-    global $questionNum, $prevNum; 
-    $questionNum = isset($_POST['questionNum']) ? $_POST['questionNum'] : 1;
-    $prevNum = $questionNum;
-    if(isset($_POST['answer'])){ 
-        $questions[$prevNum]['userAnswer'] = $_POST['answer'];
+    global $questionNum;
+    $questionNum = isset($_GET['questionNum']) ? $_GET['questionNum'] : 1;
+
+    if (!isset($_SESSION['prevQuestion'])) {
+        $_SESSION['prevQuestion'] = [$questionNum];
+    } else {
+        array_push($_SESSION['prevQuestion'], $questionNum); 
     }
-    
+
+    if (isset($_GET['answer'])) {
+        $questions[$_SESSION['prevQuestion'][0]]['userAnswer'] = $_GET['answer']; 
+    }
+
+    array_shift($_SESSION['prevQuestion']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +25,7 @@
     <title>Quiz</title>
 </head>
 <body>
-    <form action="index.php" method="POST">
+    <form action="index.php" method="GET">
         <section>
             <p>
                 <?= $questions[$questionNum-1]['question'] ?>
@@ -25,7 +33,6 @@
             
             <?php foreach($questions[$questionNum-1]['answers'] as $answer): ?>
                 <!-- <h1><?= $questionNum ?></h1> -->
-                <h1><?= $prevNum ?></h1>
                 <input type="radio" name="answer" value="<?= $answer['id']?>" 
                     <?php if ($answer['id'] == $questions[$questionNum-1]['userAnswer']) {
                         echo "checked";
@@ -37,9 +44,13 @@
             <?php for($i=0;$i<count($questions);$i++): ?>
                 <a href="?questionNum=<?= $i+1 ?>"><?= $i+1 ?></a>
             <?php endfor; ?>
-            <button name="questionNum" type="submit" value='<?= $questionNum - 1?>'>Previous</button>
+            <button name="questionNum" type="submit" value='<?= ($questionNum != 1) ? $questionNum - 1 : $questionNum?>'>Previous</button>
+            
             <?= "Soal ".$questionNum?>
-            <button name="questionNum" type="submit" value='<?= $questionNum + 1?>'>Next</button>
+            <!-- <h1><?= (int)($questionNum)?></h1> --> 
+            <!-- <h1><?= (int)($_GET['questionNum'])?></h1> -->
+            
+            <button name="questionNum" type="submit" value='<?= ($questionNum != count($questions)) ? $questionNum + 1 : $questionNum ?>'>Next</button>
         </section>
     </form>
 </body>
