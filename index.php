@@ -1,20 +1,34 @@
 <?php 
+    // Ngga bisa nyimpen jawaban di array questions karena arraynya bakal ke reset lagi (userAnswers berubah lagi jadi 0)
+    // Solusi: pakai session array, yang merupakan global variabel (tidak akan berubah ketika file direfresh)
     session_start();
     require("questions.php");
-    global $questionNum;
+
+    // Pakai variabel biar ngga kebanyakan pake isset dibawahnya
     $questionNum = isset($_GET['questionNum']) ? $_GET['questionNum'] : 1;
+    
+    // Bikin variabel prevNumber untuk nyimpen nomor soal yang diakses user sebelumnya
+    // Diambil dari variabel prevNumberAccesed di superglobal var session
+    // Nanti dipakai ketika nyimpen jawaban user
+    $prevNum = $_SESSION['prevNumberAccesed'];
+    
+    // Variabel prevNumberAccessed di SESSION berubah jadi variabel saat ini, agar bisa 
+    // diakses waktu user ganti soal
+    $_SESSION['prevNumberAccesed'] = $questionNum; 
 
-    if (!isset($_SESSION['prevQuestion'])) {
-        $_SESSION['prevQuestion'] = [$questionNum];
-    } else {
-        array_push($_SESSION['prevQuestion'], $questionNum); 
+    // Inisialisasi jawaban-jawaban dari user dengan array integer berisikan 0
+    if (!isset($_SESSION['userAnswers'])) {
+        $_SESSION['userAnswers'] = array_fill(0, count($questions), 0);
     }
 
+    // Kalau user menjawab soal, jawaban user disimpen dalam SESSION
     if (isset($_GET['answer'])) {
-        $questions[$_SESSION['prevQuestion'][0]]['userAnswer'] = $_GET['answer']; 
-    }
+        $_SESSION['userAnswers'][$prevNum-1] = $_GET['answer'];
 
-    array_shift($_SESSION['prevQuestion']);
+        // Unset agar kalo user ngga jawab di soal ini, jawabannya soal sebelumnya ngga
+        // kesimpen di soal ini
+        unset($_GET['answer']);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +46,8 @@
             </p>
             
             <?php foreach($questions[$questionNum-1]['answers'] as $answer): ?>
-                <!-- <h1><?= $questionNum ?></h1> -->
                 <input type="radio" name="answer" value="<?= $answer['id']?>" 
-                    <?php if ($answer['id'] == $questions[$questionNum-1]['userAnswer']) {
+                    <?php if ($answer['id'] == $_SESSION['userAnswers'][$questionNum-1]) {
                         echo "checked";
                     }?>>
                 <?= $answer['content'] ?>
@@ -47,9 +60,15 @@
             <button name="questionNum" type="submit" value='<?= ($questionNum != 1) ? $questionNum - 1 : $questionNum?>'>Previous</button>
             
             <?= "Soal ".$questionNum?>
+
+            <!-- Debugging -->
             <!-- <h1><?= (int)($questionNum)?></h1> --> 
             <!-- <h1><?= (int)($_GET['questionNum'])?></h1> -->
-            
+            <!-- <h1>
+                <?php for ($i = 0; $i < count($_SESSION['userAnswers']); $i++):?>
+                    <?= $_SESSION['userAnswers'][$i] ?>
+                <?php endfor?>
+            </h1> -->
             <button name="questionNum" type="submit" value='<?= ($questionNum != count($questions)) ? $questionNum + 1 : $questionNum ?>'>Next</button>
         </section>
     </form>

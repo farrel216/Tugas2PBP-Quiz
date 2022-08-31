@@ -20,8 +20,7 @@ $questions = [
                 'content' => 'Brisbane'
             ]
         ],
-        'trueAnswer' => 1,
-        'userAnswer' => 0,
+        'trueAnswer' => 1
     ],
     [
         'question' => '2. What is the capital of New Zealand?',
@@ -43,8 +42,7 @@ $questions = [
                 'content' => 'Dunedin'
             ]
         ],
-        'trueAnswer' => 1,
-        'userAnswer' => 0
+        'trueAnswer' => 1
     ],
     [
         'question' => '3. What is the capital of Indonesia?',
@@ -66,8 +64,7 @@ $questions = [
                 'content' => 'Brisbane'
             ]
         ],  
-        'trueAnswer' => 1,
-        'userAnswer' => 0
+        'trueAnswer' => 1
     ],
     [
         'question' => '4. What is the capital of Malaysia?',
@@ -89,8 +86,7 @@ $questions = [
                 'content' => 'Dunedin'
             ]
         ],
-        'trueAnswer' => 1,
-        'userAnswer' => 0
+        'trueAnswer' => 1
     ],
     [
         'question' => '5. What is the capital of Phillipines?',
@@ -112,8 +108,7 @@ $questions = [
                 'content' => 'Dunedin'
             ]
         ],
-        'trueAnswer' => 1,
-        'userAnswer' => 0
+        'trueAnswer' => 1
     ]
     ];
 ?>
