@@ -17,8 +17,6 @@
             <?= $questions[isset($_GET['id']) ? $_GET['id']-1 : 0]['question'] ?>
         </p>
         
-        <form action="index.php" method="POST">
-            <?= $_POST['answer'] ?>
             <?php foreach($questions[isset($_GET['id']) ? $_GET['id']-1 : 0]['answers'] as $answer): ?>
                 <input type="radio" name="answer" value="<?= $answer['id']?>" 
                 <?php if ($answer['id'] == $questions[isset($_GET['id']) ? $_GET['id']-1 : 0]['userAnswer']) {
@@ -26,8 +24,6 @@
                 }?>>
             <?= $answer['answer'] ?>
             <?php endforeach; ?>
-        </form>
-        <button value="Submit">
     </section>
     <?php for($i=0;$i<count($questions);$i++): ?>
         <a href="?id=<?= $i+1 ?>"><?= $i+1 ?></a>
@@ -37,17 +33,6 @@
         <?= "Soal ".$questionId ?>
         <button name="id" type="submit" value='<?= $questionId+1 ?>'>Next</button>
     </form>
-    <script>
-        // add event listeners for each input with name answer
-        const inputs = document.querySelectorAll('input[name="answer"]');
-        inputs.forEach(input => {
-            input.addEventListener('change', function() {
-                <?php 
-                    $questions[$questionId-1]['userAnswer'] = $answer['id'];
-                ?>
-            });
-        });
-    </script>
 </body>
 </html>
 
