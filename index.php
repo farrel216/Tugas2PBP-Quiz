@@ -10,7 +10,7 @@
     // Bikin variabel prevNumber untuk nyimpen nomor soal yang diakses user sebelumnya
     // Diambil dari variabel prevNumberAccesed di superglobal var session
     // Nanti dipakai ketika nyimpen jawaban user
-    $prevNum = $_SESSION['prevNumberAccesed'];
+    $prevNum = isset($_SESSION['prevNumberAccesed']) ? $_SESSION['prevNumberAccesed'] : $questionNum;
     
     // Variabel prevNumberAccessed di SESSION berubah jadi variabel saat ini, agar bisa 
     // diakses waktu user ganti soal
@@ -29,6 +29,9 @@
         // kesimpen di soal ini
         unset($_GET['answer']);
     }
+
+    // Reset session. Tinggal di uncomment, terus next / previous
+    // session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,13 +67,17 @@
             <!-- Debugging -->
             <!-- <h1><?= (int)($questionNum)?></h1> --> 
             <!-- <h1><?= (int)($_GET['questionNum'])?></h1> -->
-            <!-- <h1>
-                <?php for ($i = 0; $i < count($_SESSION['userAnswers']); $i++):?>
-                    <?= $_SESSION['userAnswers'][$i] ?>
-                <?php endfor?>
-            </h1> -->
+            
             <button name="questionNum" type="submit" value='<?= ($questionNum != count($questions)) ? $questionNum + 1 : $questionNum ?>'>Next</button>
         </section>
+
+        <!-- Uncomment untuk debugging jawaban user saat ini -->
+        <!-- <h1>Jawaban user:</h1>
+        <h2>
+            <?php foreach ($_SESSION['userAnswers'] as $ans):?>
+                <?= $ans ?>
+            <?php endforeach?>
+        </h2> -->
     </form>
 </body>
 </html>
