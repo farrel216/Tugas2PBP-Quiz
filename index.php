@@ -76,12 +76,12 @@
         </section>
 
         <!-- Uncomment untuk debugging jawaban user saat ini -->
-        <h1>Jawaban user:</h1>
+        <!-- <h1>Jawaban user:</h1>
         <h2>
             <?php foreach ($_SESSION['userAnswers'] as $ans):?>
                 <?= $ans ?>
             <?php endforeach?>
-        </h2>
+        </h2> -->
     </form>
 </body>
 </html>
