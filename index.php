@@ -73,15 +73,16 @@
             <!-- <h1><?= (int)($_GET['questionNum'])?></h1> -->
             
             <button name="questionNum" type="submit" value='<?= ($questionNum != count($questions)) ? $questionNum + 1 : $questionNum ?>'>Next</button>
+        <!-- Reset All button -->
+        <a href="reset.php">Reset All Answer</a>
         </section>
-
         <!-- Uncomment untuk debugging jawaban user saat ini -->
-        <!-- <h1>Jawaban user:</h1>
+        <h1>Jawaban user:</h1>
         <h2>
             <?php foreach ($_SESSION['userAnswers'] as $ans):?>
                 <?= $ans ?>
             <?php endforeach?>
-        </h2> -->
+        </h2>
     </form>
 </body>
 </html>
