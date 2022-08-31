@@ -1,117 +1,115 @@
 <?php
-global $questionId, $userAnswer;
-$questionId = 1;
 $questions = [
     [
-        'question' => 'What is the capital of Australia?',
+        'question' => '1. What is the capital of Australia?',
         'answers' => [
             [
                 'id' => 1,
-                'answer' => 'Canberra'
+                'content' => 'Canberra'
             ],
             [
                 'id' => 2,
-                'answer' => 'Sydney'
+                'content' => 'Sydney'
             ],
             [
                 'id' => 3,
-                'answer' => 'Melbourne'
+                'content' => 'Melbourne'
             ],
             [
                 'id' => 4,
-                'answer' => 'Brisbane'
+                'content' => 'Brisbane'
             ]
         ],
         'trueAnswer' => 1,
         'userAnswer' => 0,
     ],
     [
-        'question' => 'What is the capital of New Zealand?',
+        'question' => '2. What is the capital of New Zealand?',
         'answers' => [
             [
                 'id' => 1,
-                'answer' => 'Wellington'
+                'content' => 'Wellington'
             ],
             [
                 'id' => 2,
-                'answer' => 'Auckland'
+                'content' => 'Auckland'
             ],
             [
                 'id' => 3,
-                'answer' => 'Christchurch'
+                'content' => 'Christchurch'
             ],
             [
                 'id' => 4,
-                'answer' => 'Dunedin'
+                'content' => 'Dunedin'
             ]
         ],
         'trueAnswer' => 1,
         'userAnswer' => 0
     ],
     [
-        'question' => 'What is the capital of Indonesia?',
+        'question' => '3. What is the capital of Indonesia?',
         'answers' => [
             [
                 'id' => 1,
-                'answer' => 'Jakarta'
+                'content' => 'Jakarta'
             ],
             [
                 'id' => 2,
-                'answer' => 'Sydney'
+                'content' => 'Sydney'
             ],
             [
                 'id' => 3,
-                'answer' => 'Melbourne'
+                'content' => 'Melbourne'
             ],
             [
                 'id' => 4,
-                'answer' => 'Brisbane'
+                'content' => 'Brisbane'
             ]
         ],  
         'trueAnswer' => 1,
         'userAnswer' => 0
     ],
     [
-        'question' => 'What is the capital of Malaysia?',
+        'question' => '4. What is the capital of Malaysia?',
         'answers' => [
             [
                 'id' => 1,
-                'answer' => 'Kuala Lumpur'
+                'content' => 'Kuala Lumpur'
             ],
             [
                 'id' => 2,
-                'answer' => 'Auckland'
+                'content' => 'Auckland'
             ],
             [
                 'id' => 3,
-                'answer' => 'Christchurch'
+                'content' => 'Christchurch'
             ],
             [
                 'id' => 4,
-                'answer' => 'Dunedin'
+                'content' => 'Dunedin'
             ]
         ],
         'trueAnswer' => 1,
         'userAnswer' => 0
     ],
     [
-        'question' => 'What is the capital of Phillipines?',
+        'question' => '5. What is the capital of Phillipines?',
         'answers' => [
             [
                 'id' => 1,
-                'answer' => 'Manila'
+                'content' => 'Manila'
             ],
             [
                 'id' => 2,
-                'answer' => 'Auckland'
+                'content' => 'Auckland'
             ],
             [
                 'id' => 3,
-                'answer' => 'Christchurch'
+                'content' => 'Christchurch'
             ],
             [
                 'id' => 4,
-                'answer' => 'Dunedin'
+                'content' => 'Dunedin'
             ]
         ],
         'trueAnswer' => 1,

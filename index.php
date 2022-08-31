@@ -1,7 +1,12 @@
 <?php 
     require("questions.php");
-    isset($_GET['id']) ? $questionId = $_GET['id'] : $questionId = 0;
-
+    global $questionNum, $prevNum; 
+    $questionNum = isset($_POST['questionNum']) ? $_POST['questionNum'] : 1;
+    $prevNum = $questionNum;
+    if(isset($_POST['answer'])){ 
+        $questions[$prevNum]['userAnswer'] = $_POST['answer'];
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,26 +17,30 @@
     <title>Quiz</title>
 </head>
 <body>
-    <section>
-        <p>
-            <?= $questions[isset($_GET['id']) ? $_GET['id']-1 : 0]['question'] ?>
-        </p>
-        
-            <?php foreach($questions[isset($_GET['id']) ? $_GET['id']-1 : 0]['answers'] as $answer): ?>
+    <form action="index.php" method="POST">
+        <section>
+            <p>
+                <?= $questions[$questionNum-1]['question'] ?>
+            </p>
+            
+            <?php foreach($questions[$questionNum-1]['answers'] as $answer): ?>
+                <!-- <h1><?= $questionNum ?></h1> -->
+                <h1><?= $prevNum ?></h1>
                 <input type="radio" name="answer" value="<?= $answer['id']?>" 
-                <?php if ($answer['id'] == $questions[isset($_GET['id']) ? $_GET['id']-1 : 0]['userAnswer']) {
-                    echo "checked";
-                }?>>
-            <?= $answer['answer'] ?>
+                    <?php if ($answer['id'] == $questions[$questionNum-1]['userAnswer']) {
+                        echo "checked";
+                    }?>>
+                <?= $answer['content'] ?>
             <?php endforeach; ?>
-    </section>
-    <?php for($i=0;$i<count($questions);$i++): ?>
-        <a href="?id=<?= $i+1 ?>"><?= $i+1 ?></a>
-        <?php endfor; ?>
-    <form action="index.php" method="GET">
-        <button name="id" type="submit" value='<?= $questionId-1 ?>'>Previous</button>
-        <?= "Soal ".$questionId ?>
-        <button name="id" type="submit" value='<?= $questionId+1 ?>'>Next</button>
+        </section>
+        <section>
+            <?php for($i=0;$i<count($questions);$i++): ?>
+                <a href="?questionNum=<?= $i+1 ?>"><?= $i+1 ?></a>
+            <?php endfor; ?>
+            <button name="questionNum" type="submit" value='<?= $questionNum - 1?>'>Previous</button>
+            <?= "Soal ".$questionNum?>
+            <button name="questionNum" type="submit" value='<?= $questionNum + 1?>'>Next</button>
+        </section>
     </form>
 </body>
 </html>
