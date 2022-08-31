@@ -3,7 +3,7 @@
     // Solusi: pakai session array, yang merupakan global variabel (tidak akan berubah ketika file direfresh)
     session_start();
     require("questions.php");
-
+  
     // Pakai variabel biar ngga kebanyakan pake isset dibawahnya
     $questionNum = isset($_GET['questionNum']) ? $_GET['questionNum'] : 1;
     
