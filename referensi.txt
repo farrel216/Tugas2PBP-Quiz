@@ -1,0 +1,35 @@
+<!-- create quiz application -->
+    <h1>Quiz</h1>
+    <!-- question data -->
+
+    <form action="index.php" method="post">
+        <?php foreach ($questions as $question) : ?>
+            <div>
+                <h3><?= $question['question'] ?></h3>
+                <?php foreach ($question['answers'] as $answer) : ?>
+                    <label>
+                        <input type="radio" name="<?= $question['id'] ?>" value="<?= $answer['id'] ?>">
+                        <?= $answer['answer'] ?>
+                    </label>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- results -->
+    <?php if (isset($_POST)) : ?>
+        <h2>Results</h2>
+        <?php foreach ($questions as $question) : ?>
+            <div>
+                <h3><?= $question['question'] ?></h3>
+                <?php foreach ($question['answers'] as $answer) : ?>
+                    <?php if ($answer['id'] == $_POST[$question['id']]) : ?>
+                        <p>You answered: <?= $answer['answer'] ?></p>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <!-- form -->
