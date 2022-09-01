@@ -93,7 +93,7 @@ if (isset($_GET['submit'])) {
                     <button class="btn btn-lg btn-primary my-3" type="submit" id="submit-btn">Submit</button>
 
             <!-- Timer -->
-            <div id="timer"></div>
+            <div class="text-light fs-3" id="timer"></div>
                     <div class="d-flex">
                         <button style="visibility: <?= ($questionNum == 1 ? 'hidden' : 'visible') ?>" class="btn btn-warning  me-2 <?= ($questionNum == 1 ? 'hidden' : '') ?>" name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' >Previous</button>
                         <button style="visibility: <?= ($questionNum == count($questions) ? 'hidden' : 'visible') ?>" class="btn btn-warning" name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' >Next</button>
@@ -138,6 +138,19 @@ if (isset($_GET['submit'])) {
             let hour = Math.floor(remainingSeconds / 3600)
             let minute = Math.floor(remainingSeconds % 3600 / 60)
             let second = Math.floor(remainingSeconds % 3600 % 60)
+
+            if(hour === 0 && minute === 0 && second === 0) {
+                const radioButtons = document.getElementsByName("answer");
+                let answeredIdx = 0;
+                for (let i = 0; i < radioButtons.length; i++) {
+                    if (radioButtons[i].checked) {
+                        answeredIdx = i + 1;
+                        break;
+                    }
+                }
+
+                window.location.href = `questionPage.php?answer=${answeredIdx}&submit=True`
+            }
             
             timer.innerHTML = `${(hour < 10 ? '0' : '') + hour}:${(minute < 10 ? '0' : '') + minute}:${(second < 10 ? '0' : '') + second}`
         }
