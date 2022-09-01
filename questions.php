@@ -1,4 +1,5 @@
 <?php
+$timeLimitSec = 120 * 60;
 $questions = [
     [
         'question' => 'PHP Merupakan singkatan dari?',

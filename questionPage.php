@@ -16,6 +16,11 @@ $prevNum = isset($_SESSION['prevNumberAccesed']) ? $_SESSION['prevNumberAccesed'
 // diakses waktu user ganti soal
 $_SESSION['prevNumberAccesed'] = $questionNum;
 
+if (!isset($_SESSION['start_time'])) {
+    $date = new DateTime("now", new DateTimeZone("Asia/Bangkok"));
+    $_SESSION['start_time'] = $date->format('Y-m-d H:i:s');
+}
+
 // Inisialisasi jawaban-jawaban dari user dengan array integer berisikan 0
 if (!isset($_SESSION['userAnswers'])) {
     $_SESSION['userAnswers'] = array_fill(0, count($questions), 0);
@@ -50,9 +55,7 @@ if (isset($_GET['submit'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Quiz - Soal <?= $questionNum ?> dari <?= count($questions) ?></title>
-    <style>
-    </style>
+    <title>Quiz - Soal <?=$questionNum?> dari <?=count($questions)?></title>
 </head>
 
 <body class="container bg-success d-flex flex-column align-items-center justify-content-center py-5">
@@ -89,6 +92,8 @@ if (isset($_GET['submit'])) {
                 <section class="d-flex flex-column align-items-center">
                     <button class="btn btn-lg btn-primary my-3" type="submit" id="submit-btn">Submit</button>
 
+            <!-- Timer -->
+            <div id="timer"></div>
                     <div class="d-flex">
                         <button style="visibility: <?= ($questionNum == 1 ? 'hidden' : 'visible') ?>" class="btn btn-warning  me-2 <?= ($questionNum == 1 ? 'hidden' : '') ?>" name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' >Previous</button>
                         <button style="visibility: <?= ($questionNum == count($questions) ? 'hidden' : 'visible') ?>" class="btn btn-warning" name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' >Next</button>
@@ -123,6 +128,23 @@ if (isset($_GET['submit'])) {
                 window.location.href = `questionPage.php?answer=${answeredIdx}&submit=True`
             }
         })
+        
+        const timer = document.getElementById("timer")
+        function timerFunc() {
+            let startTime = new Date("<?= $_SESSION['start_time'] ?>"); 
+            let currentTime = new Date()
+            
+            let remainingSeconds = parseInt("<?= $timeLimitSec ?>") - Math.floor(Math.abs(currentTime - startTime) / 1000)
+            let hour = Math.floor(remainingSeconds / 3600)
+            let minute = Math.floor(remainingSeconds % 3600 / 60)
+            let second = Math.floor(remainingSeconds % 3600 % 60)
+            
+            timer.innerHTML = `${(hour < 10 ? '0' : '') + hour}:${(minute < 10 ? '0' : '') + minute}:${(second < 10 ? '0' : '') + second}`
+        }
+
+        timerFunc()
+
+        setInterval (timerFunc, 1000);
     </script>
 </body>
 
