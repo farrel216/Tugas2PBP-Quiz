@@ -53,7 +53,7 @@ if (isset($_GET['answer'])) {
             <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
                 <input type="radio" name="answer" value="<?= $answer['id'] ?>" <?php if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
                                                                                     echo "checked";
-                                                                                } ?>>
+            } ?>>
                 <?= $answer['content'] ?>
             <?php endforeach; ?>
         </section>
@@ -68,10 +68,9 @@ if (isset($_GET['answer'])) {
 
             <button name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' <?= ($questionNum == count($questions) ? 'hidden' : '') ?>>Next</button>
 
-            <!-- Reset answer with anchor tag -->
+            <!-- Reset answer -->
             <a href="?answer=0&questionNum=<?=$questionNum?>">Reset</a>
-            <!-- Reset All button -->
-            <a href="reset.php">Reset All Answer</a>
+
         </section>
 
         <!-- Uncomment untuk debugging jawaban user saat ini -->
