@@ -68,8 +68,9 @@ if (isset($_GET['answer'])) {
 
             <button name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' <?= ($questionNum == count($questions) ? 'hidden' : '') ?>>Next</button>
 
+            <!-- Reset answer with anchor tag -->
+            <a href="?answer=0&questionNum=<?=$questionNum?>">Reset</a>
             <!-- Reset All button -->
-            <button name="questionNum" type="submit" value='reset.php'>Reset All</button>
             <a href="reset.php">Reset All Answer</a>
         </section>
 
