@@ -23,92 +23,202 @@ $questions = [
         'trueAnswer' => 3
     ],
     [
-        'question' => '2. What is the capital of New Zealand?',
+        'question' => 'Kode PHP diawali dan di akhiri dengan tanda?',
         'answers' => [
             [
                 'id' => 1,
-                'content' => 'Wellington'
+                'content' => '<?php … </?php>'
             ],
             [
                 'id' => 2,
-                'content' => 'Auckland'
+                'content' => '<script> … </script>'
             ],
             [
                 'id' => 3,
-                'content' => 'Christchurch'
+                'content' => '<?php … ?>'
             ],
             [
                 'id' => 4,
-                'content' => 'Dunedin'
+                'content' => '<php … /?>'
             ]
         ],
-        'trueAnswer' => 1
+        'trueAnswer' => 3
     ],
     [
-        'question' => '3. What is the capital of Indonesia?',
+        'question' => '3. Sintak untuk mencetak output "Hello World" di PHP?',
         'answers' => [
             [
                 'id' => 1,
-                'content' => 'Jakarta'
+                'content' => 'cout<<“Hello World”;'
             ],
             [
                 'id' => 2,
-                'content' => 'Sydney'
+                'content' => 'System.out.print(“Hello World”);'
             ],
             [
                 'id' => 3,
-                'content' => 'Melbourne'
+                'content' => 'document.write (“Hello World”)'
             ],
             [
                 'id' => 4,
-                'content' => 'Brisbane'
+                'content' => 'echo “Hello World”;'
             ]
         ],  
-        'trueAnswer' => 1
+        'trueAnswer' => 4
     ],
     [
-        'question' => '4. What is the capital of Malaysia?',
+        'question' => '4. Setiap variabel di PHP diawali dengan simbol?',
         'answers' => [
             [
                 'id' => 1,
-                'content' => 'Kuala Lumpur'
+                'content' => '#'
             ],
             [
                 'id' => 2,
-                'content' => 'Auckland'
+                'content' => '$'
             ],
             [
                 'id' => 3,
-                'content' => 'Christchurch'
+                'content' => '%'
             ],
             [
                 'id' => 4,
-                'content' => 'Dunedin'
+                'content' => '*'
+            ]
+        ],
+        'trueAnswer' => 2
+    ],
+    [
+        'question' => '5. Setiap perintah dalam PHP diakhiri dengan tanda?',
+        'answers' => [
+            [
+                'id' => 1,
+                'content' => ':'
+            ],
+            [
+                'id' => 2,
+                'content' => ';'
+            ],
+            [
+                'id' => 3,
+                'content' => '*'
+            ],
+            [
+                'id' => 4,
+                'content' => '</php>'
+            ]
+        ],
+        'trueAnswer' => 2
+    ],
+    [
+        'question' => '6. Untuk membuat komentar di PHP menggunakan tanda?',
+        'answers' => [
+            [
+                'id' => 1,
+                'content' => '//'
+            ],
+            [
+                'id' => 2,
+                'content' => '/*'
+            ],
+            [
+                'id' => 3,
+                'content' => '%'
+            ],
+            [
+                'id' => 4,
+                'content' => '$'
             ]
         ],
         'trueAnswer' => 1
     ],
     [
-        'question' => '5. What is the capital of Phillipines?',
+        'question' => '7. Tipe data integer di PHP digunakan untuk data?',
         'answers' => [
             [
                 'id' => 1,
-                'content' => 'Manila'
+                'content' => 'Bilangan bulat'
             ],
             [
                 'id' => 2,
-                'content' => 'Auckland'
+                'content' => 'Bilangan Pecahan'
             ],
             [
                 'id' => 3,
-                'content' => 'Christchurch'
+                'content' => 'Boolean'
             ],
             [
                 'id' => 4,
-                'content' => 'Dunedin'
+                'content' => 'NULL'
             ]
         ],
         'trueAnswer' => 1
+    ],
+    [
+        'question' => '8. "Tipe data Boolean hanya memiliki nilai true dan false!" Pernyataan ini...',
+        'answers' => [
+            [
+                'id' => 1,
+                'content' => 'Benar'
+            ],
+            [
+                'id' => 2,
+                'content' => 'Salah'
+            ],
+            [
+                'id' => 3,
+                'content' => 'Jawaban a dan b benar'
+            ],
+            [
+                'id' => 4,
+                'content' => 'Tidak diketahui'
+            ]
+        ],
+        'trueAnswer' => 1
+    ],
+    [
+        'question' => '9. Operator aritmatika digunakan untuk melakukan operasi?',
+        'answers' => [
+            [
+                'id' => 1,
+                'content' => 'Aritmatika'
+            ],
+            [
+                'id' => 2,
+                'content' => 'Pembanding'
+            ],
+            [
+                'id' => 3,
+                'content' => 'Relasi'
+            ],
+            [
+                'id' => 4,
+                'content' => 'Assignment'
+            ]
+        ],
+        'trueAnswer' => 1
+    ],
+    [
+        'question' => '10. Berikut ini contoh operator aritmatika, kecuali',
+        'answers' => [
+            [
+                'id' => 1,
+                'content' => '+'
+            ],
+            [
+                'id' => 2,
+                'content' => '%'
+            ],
+            [
+                'id' => 3,
+                'content' => '>='
+            ],
+            [
+                'id' => 4,
+                'content' => '/'
+            ]
+        ],
+        'trueAnswer' => 3
     ]
     ];
 ?>
