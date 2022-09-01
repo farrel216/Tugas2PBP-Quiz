@@ -30,6 +30,12 @@ if (isset($_GET['answer'])) {
     unset($_GET['answer']);
 }
 
+if (isset($_GET['submit'])) {
+    if ((bool)$_GET['submit']) {
+        header('Location: scorePage.php');
+    }
+}
+
 // Reset session. Tinggal di uncomment, terus next / previous
 // session_destroy();
 ?>
@@ -53,6 +59,7 @@ if (isset($_GET['answer'])) {
             <p>
                 <?= $questions[$questionNum - 1]['question'] ?>
             </p>
+
             <ul class="list-group">
                 <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
                     <li class="list-group-item">
@@ -65,7 +72,7 @@ if (isset($_GET['answer'])) {
                     </li>
                 <?php endforeach; ?>
             </ul>
-            
+
         </section>
         <section>
             <button name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' <?= ($questionNum == 1 ? 'hidden' : '') ?>>Previous</button>
@@ -79,7 +86,7 @@ if (isset($_GET['answer'])) {
             <button name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' <?= ($questionNum == count($questions) ? 'hidden' : '') ?>>Next</button>
 
             <!-- Reset answer -->
-            <a href="?answer=0&questionNum=<?=$questionNum?>">Reset</a>
+            <a href="?answer=0&questionNum=<?= $questionNum ?>">Reset</a>
 
         </section>
 
@@ -94,16 +101,24 @@ if (isset($_GET['answer'])) {
         <?php for ($i = 0; $i < count($questions); $i++) : ?>
             <button name="questionNum" type="submit" value=<?= $i + 1 ?>><?= $i + 1 ?></button>
         <?php endfor; ?>
+        <button type="submit" id="submit-btn">Submit</button>
     </form>
-    <section>
-        <button type="submit" onclick="confirmSubmit(<?= array_count_values($_SESSION['userAnswers'])['0'] ?>)">Submit</button>
-    </section>
     <script>
-        function confirmSubmit(unansweredQuestion) {
-            if (confirm("Apakah anda ingin mensubmit?")) {
-                window.location.href = "scorePage.php"
+        document.getElementById("submit-btn").addEventListener('click', (e) => {
+            e.preventDefault()
+            if (confirm("Apakah anda ingin mensubmit?")){
+                const radioButtons = document.getElementsByName("answer");
+                let answeredIdx = 0;
+                for (let i = 0; i < radioButtons.length; i++) {
+                    if (radioButtons[i].checked) {
+                        answeredIdx = i+1;
+                        break;
+                    }
+                }
+
+                window.location.href = `questionPage.php?answer=${answeredIdx}&submit=True`
             }
-        }
+        }) 
     </script>
 </body>
 
