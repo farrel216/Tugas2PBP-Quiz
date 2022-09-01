@@ -8,8 +8,6 @@
             $correctAnswer++;
         }
     }
-
-    session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +36,6 @@
     <h1 class="text-light">Selamat!!!</h1>
     <h2 class="text-light">Kamu telah menjawab benar <?=$correctAnswer?> dari <?=count($questions)?></h2>
     <!-- Play Again Button -->
-    <button type="button" class="btn btn-primary btn-lg"><a class="nav-link text-light" href="questionPage.php"><a href="reset.php">Play Again</a></button>
+    <button type="button" class="btn btn-primary btn-lg"><a class="nav-link text-light" href="questionPage.php"><a class="nav-link" href="reset.php">Play Again</a></button>
 </body>
 </html>
