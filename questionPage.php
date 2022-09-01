@@ -16,6 +16,11 @@ $prevNum = isset($_SESSION['prevNumberAccesed']) ? $_SESSION['prevNumberAccesed'
 // diakses waktu user ganti soal
 $_SESSION['prevNumberAccesed'] = $questionNum;
 
+if (!isset($_SESSION['start_time'])) {
+    $date = new DateTime("now", new DateTimeZone("Asia/Bangkok"));
+    $_SESSION['start_time'] = $date->format('Y-m-d H:i:s');
+}
+
 // Inisialisasi jawaban-jawaban dari user dengan array integer berisikan 0
 if (!isset($_SESSION['userAnswers'])) {
     $_SESSION['userAnswers'] = array_fill(0, count($questions), 0);
@@ -51,17 +56,17 @@ if (isset($_GET['submit'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Quiz - Soal <?=$questionNum?> dari <?=count($questions)?></title>
-    <style>
-    </style>
 </head>
 
 <body class="bg-success d-flex flex-column align-items-center justify-content-center">
     <form action="questionPage.php" method="GET">
         <section class="bg-light">
+            <!-- Question -->
             <p>
                 <?= $questions[$questionNum - 1]['question'] ?>
             </p>
 
+            <!-- Answer -->
             <ul class="list-group">
                 <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
                     <li class="list-group-item">
@@ -74,9 +79,9 @@ if (isset($_GET['submit'])) {
                     </li>
                 <?php endforeach; ?>
             </ul>
-
         </section>
         <section>
+            <!-- Previous Button -->
             <button name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' <?= ($questionNum == 1 ? 'hidden' : '') ?>>Previous</button>
 
             <?= "Soal " . $questionNum ?>
@@ -84,12 +89,15 @@ if (isset($_GET['submit'])) {
             <!-- Debugging -->
             <!-- <h1><?= (int)($questionNum) ?></h1> -->
             <!-- <h1><?= (int)($_GET['questionNum']) ?></h1> -->
-
+            
+            <!-- Next button -->
             <button name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' <?= ($questionNum == count($questions) ? 'hidden' : '') ?>>Next</button>
 
             <!-- Reset answer -->
             <a href="?answer=0&questionNum=<?= $questionNum ?>">Reset</a>
 
+            <!-- Timer -->
+            <div id="timer"></div>
         </section>
 
         <!-- Uncomment untuk debugging jawaban user saat ini -->
@@ -120,7 +128,24 @@ if (isset($_GET['submit'])) {
 
                 window.location.href = `questionPage.php?answer=${answeredIdx}&submit=True`
             }
-        }) 
+        })
+        
+        const timer = document.getElementById("timer")
+        function timerFunc() {
+            let startTime = new Date("<?= $_SESSION['start_time'] ?>"); 
+            let currentTime = new Date()
+            
+            let remainingSeconds = parseInt("<?= $timeLimitSec ?>") - Math.floor(Math.abs(currentTime - startTime) / 1000)
+            let hour = Math.floor(remainingSeconds / 3600)
+            let minute = Math.floor(remainingSeconds % 3600 / 60)
+            let second = Math.floor(remainingSeconds % 3600 % 60)
+            
+            timer.innerHTML = `${(hour < 10 ? '0' : '') + hour}:${(minute < 10 ? '0' : '') + minute}:${(second < 10 ? '0' : '') + second}`
+        }
+
+        timerFunc()
+
+        setInterval (timerFunc, 1000);
     </script>
 </body>
 

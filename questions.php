@@ -1,4 +1,5 @@
 <?php
+$timeLimitSec = 120 * 60;
 $questions = [
     [
         'question' => '1. What is the capital of Australia?',
