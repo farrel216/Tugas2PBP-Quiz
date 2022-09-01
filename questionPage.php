@@ -79,7 +79,7 @@ if (isset($_GET['submit'])) {
                 <!-- Reset answer -->
                 <a class="nav-link text-danger mt-2" href="?answer=0&questionNum=<?= $questionNum ?>">Reset</a>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 mt-3 mt-lg-0">
                 <!-- Navigasi angka -->
                 <nav class="navigation p-2 rounded-2" style="background:#E6F1F3; min-height: 200px;">
                     <?php for ($i = 0; $i < count($questions); $i++) : ?>
