@@ -14,7 +14,7 @@ session_destroy();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Quiz</title>
+    <title>[SIAP] Pengembangan Berbasis Platform C</title>
     <style>
         body {
             height: 100vh;
@@ -27,7 +27,7 @@ session_destroy();
     </style>
 </head>
 <body class="bg-success d-flex flex-column align-items-center justify-content-center">
-    <h1 class="text-light">Parampa</h1>
+    <h1 class="text-light">Kuis 2 - PHP</h1>
     <button type="button" class="btn btn-primary btn-lg"><a class="nav-link" href="questionPage.php">Start</a></button>
 </body>
 </html>
