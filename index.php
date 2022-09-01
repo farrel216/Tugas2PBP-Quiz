@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>NAMA QUIZ</h1>
-    <a href="questionsPage.php">Start</a>
+    <a href="questionPage.php">Start</a>
 </body>
 </html>
