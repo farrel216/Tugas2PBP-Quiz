@@ -103,10 +103,8 @@ if (isset($_GET['submit'])) {
         <?php for ($i = 0; $i < count($questions); $i++) : ?>
                 <button class="<?= ($_SESSION['userAnswers'][$i] != 0 || $_SESSION['userAnswers'][$i] != '0' ? 'bg-secondary' : 'bg-light ') ?> " name="questionNum" type="submit" value=<?= $i + 1 ?>><?= $i + 1 ?></button>
         <?php endfor; ?>
+        <button type="submit" id="submit-btn">Submit</button>
     </form>
-    <section>
-        <button type="submit" onclick="confirmSubmit()">Submit</button>
-    </section>
     <script>
         document.getElementById("submit-btn").addEventListener('click', (e) => {
             e.preventDefault()
