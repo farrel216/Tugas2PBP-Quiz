@@ -58,70 +58,69 @@ if (isset($_GET['submit'])) {
     <title>Quiz - Soal <?=$questionNum?> dari <?=count($questions)?></title>
 </head>
 
-<body class="bg-success d-flex flex-column align-items-center justify-content-center">
-    <form action="questionPage.php" method="GET">
-        <section class="bg-light">
-            <!-- Question -->
-            <p>
-                <?= $questions[$questionNum - 1]['question'] ?>
-            </p>
-
-            <!-- Answer -->
-            <ul class="list-group">
-                <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
-                    <li class="list-group-item">
-                    <input class="" type="radio" name="answer" id="<?= $answer['id'] ?>" value="<?= $answer['id'] ?>" <?php 
-                        if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
-                            echo "checked";
-                        } 
-                    ?>>
-                    <label class="user-select-none" for="<?= $answer['id'] ?>"><?= $answer['content'] ?></label>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </section>
-        <section>
-            <!-- Previous Button -->
-            <button name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' <?= ($questionNum == 1 ? 'hidden' : '') ?>>Previous</button>
-
-            <?= "Soal " . $questionNum ?>
-
-            <!-- Debugging -->
-            <!-- <h1><?= (int)($questionNum) ?></h1> -->
-            <!-- <h1><?= (int)($_GET['questionNum']) ?></h1> -->
-            
-            <!-- Next button -->
-            <button name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' <?= ($questionNum == count($questions) ? 'hidden' : '') ?>>Next</button>
-
-            <!-- Reset answer -->
-            <a href="?answer=0&questionNum=<?= $questionNum ?>">Reset</a>
+<body class="container bg-success d-flex flex-column align-items-center justify-content-center py-5">
+    <form action="questionPage.php" method="GET" style="width:100%;">
+        <section class="row">
+            <div class="col-lg-9 rounded-2 p-4 fs-3" style="background:#E6F1F3;">
+                <p>
+                    <?= $questions[$questionNum - 1]['question'] ?>
+                </p>
+                <ul class="list-group">
+                    <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
+                        <li class="list-group-item">
+                            <input class="" type="radio" name="answer" id="<?= $answer['id'] ?>" value="<?= $answer['id'] ?>" 
+                            <?php
+                            if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
+                                echo "checked";
+                            }
+                            ?>>
+                            <label class="user-select-none" for="<?= $answer['id'] ?>"><?= $answer['content'] ?></label>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                
+                <!-- Reset answer -->
+                <a class="nav-link text-danger mt-2" href="?answer=0&questionNum=<?= $questionNum ?>">Reset</a>
+            </div>
+            <div class="col-lg-3 mt-3 mt-lg-0">
+                <!-- Navigasi angka -->
+                <nav class="navigation p-2 rounded-2" style="background:#E6F1F3; min-height: 200px;">
+                    <?php for ($i = 0; $i < count($questions); $i++) : ?>
+                        <button class="btn btn-lg m-2 <?= ($_SESSION['userAnswers'][$i] != 0 || $_SESSION['userAnswers'][$i] != '0' ? 'bg-success text-light' : 'bg-light ') ?> " name="questionNum" type="submit" value=<?= $i + 1 ?>><?= $i + 1 ?></button>
+                    <?php endfor; ?>
+                </nav>
+                <section class="d-flex flex-column align-items-center">
+                    <button class="btn btn-lg btn-primary my-3" type="submit" id="submit-btn">Submit</button>
 
             <!-- Timer -->
             <div id="timer"></div>
-        </section>
+                    <div class="d-flex">
+                        <button style="visibility: <?= ($questionNum == 1 ? 'hidden' : 'visible') ?>" class="btn btn-warning  me-2 <?= ($questionNum == 1 ? 'hidden' : '') ?>" name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' >Previous</button>
+                        <button style="visibility: <?= ($questionNum == count($questions) ? 'hidden' : 'visible') ?>" class="btn btn-warning" name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' >Next</button>
+                    </div>
+                </section>
 
-        <!-- Uncomment untuk debugging jawaban user saat ini -->
-        <h1>Jawaban user:</h1>
+                <!-- Uncomment untuk debugging jawaban user saat ini -->
+                <!-- <h1>Jawaban user:</h1>
         <h2>
             <?php foreach ($_SESSION['userAnswers'] as $ans) : ?>
                 <?= $ans ?>
             <?php endforeach ?>
-        </h2>
-        <!-- Navigasi angka -->
-        <?php for ($i = 0; $i < count($questions); $i++) : ?>
-                <button class="<?= ($_SESSION['userAnswers'][$i] != 0 || $_SESSION['userAnswers'][$i] != '0' ? 'bg-secondary' : 'bg-light ') ?> " name="questionNum" type="submit" value=<?= $i + 1 ?>><?= $i + 1 ?></button>
-        <?php endfor; ?>
-        <button type="submit" id="submit-btn">Submit</button>
+        </h2> -->
+            </div>
+
+
+        </section>
     </form>
     <script>
         document.getElementById("submit-btn").addEventListener('click', (e) => {
             e.preventDefault()
-            if (confirm("Apakah anda ingin mensubmit?")){
+            if (confirm("Apakah anda yakin ingin mensubmit?")) {
                 const radioButtons = document.getElementsByName("answer");
                 let answeredIdx = 0;
                 for (let i = 0; i < radioButtons.length; i++) {
                     if (radioButtons[i].checked) {
-                        answeredIdx = i+1;
+                        answeredIdx = i + 1;
                         break;
                     }
                 }
