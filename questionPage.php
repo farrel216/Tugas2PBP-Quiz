@@ -58,7 +58,7 @@ if (isset($_GET['submit'])) {
 <body class="container bg-success d-flex flex-column align-items-center justify-content-center py-5">
     <form action="questionPage.php" method="GET" style="width:100%;">
         <section class="row">
-            <div class="col-lg-9 rounded-2 p-4" style="background:#E6F1F3;">
+            <div class="col-lg-9 rounded-2 p-4 fs-3" style="background:#E6F1F3;">
                 <p>
                     <?= $questions[$questionNum - 1]['question'] ?>
                 </p>
@@ -110,7 +110,7 @@ if (isset($_GET['submit'])) {
     <script>
         document.getElementById("submit-btn").addEventListener('click', (e) => {
             e.preventDefault()
-            if (confirm("Apakah anda ingin mensubmit?")) {
+            if (confirm("Apakah anda yakin ingin mensubmit?")) {
                 const radioButtons = document.getElementsByName("answer");
                 let answeredIdx = 0;
                 for (let i = 0; i < radioButtons.length; i++) {
