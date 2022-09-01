@@ -27,19 +27,19 @@ $questions = [
         'answers' => [
             [
                 'id' => 1,
-                'content' => '<?php … </?php>'
+                'content' => '&lt;?php> ... &lt;/?php&gt;'
             ],
             [
                 'id' => 2,
-                'content' => '<script> … </script>'
+                'content' => '&lt;script> … &lt;/script&gt;'
             ],
             [
                 'id' => 3,
-                'content' => '<?php … ?>'
+                'content' => '&lt;?php … ?&gt;'
             ],
             [
                 'id' => 4,
-                'content' => '<php … /?>'
+                'content' => '&lt;php … /?&gt;'
             ]
         ],
         'trueAnswer' => 3
@@ -105,7 +105,7 @@ $questions = [
             ],
             [
                 'id' => 4,
-                'content' => '</php>'
+                'content' => '&lt;/php&gt'
             ]
         ],
         'trueAnswer' => 2
