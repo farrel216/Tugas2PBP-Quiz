@@ -51,9 +51,11 @@ if (isset($_GET['answer'])) {
             </p>
 
             <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
-                <input type="radio" name="answer" value="<?= $answer['id'] ?>" <?php if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
-                                                                                    echo "checked";
-            } ?>>
+                <input type="radio" name="answer" value="<?= $answer['id'] ?>" <?php 
+                    if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
+                        echo "checked";
+                    } 
+                ?>>
                 <?= $answer['content'] ?>
             <?php endforeach; ?>
         </section>
@@ -86,10 +88,15 @@ if (isset($_GET['answer'])) {
         <?php endfor; ?>
     </form>
     <section>
-        <form action="scorePage.php" method="GET">
-            <button type="submit">Submit</button>
-        </form>
+        <button type="submit" onclick="confirmSubmit(<?= array_count_values($_SESSION['userAnswers'])['0'] ?>)">Submit</button>
     </section>
+    <script>
+        function confirmSubmit(unansweredQuestion) {
+            if (confirm("Apakah anda ingin mensubmit?")) {
+                window.location.href = "scorePage.php"
+            }
+        }
+    </script>
 </body>
 
 </html>
