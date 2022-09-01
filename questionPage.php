@@ -45,6 +45,8 @@ if (isset($_GET['answer'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Quiz - Soal <?=$questionNum?> dari <?=count($questions)?></title>
+    <style>
+    </style>
 </head>
 
 <body class="bg-success d-flex flex-column align-items-center justify-content-center">
@@ -84,26 +86,37 @@ if (isset($_GET['answer'])) {
         </section>
 
         <!-- Uncomment untuk debugging jawaban user saat ini -->
-        <!-- <h1>Jawaban user:</h1>
+        <h1>Jawaban user:</h1>
         <h2>
             <?php foreach ($_SESSION['userAnswers'] as $ans) : ?>
                 <?= $ans ?>
             <?php endforeach ?>
-        </h2> -->
+        </h2>
         <!-- Navigasi angka -->
         <?php for ($i = 0; $i < count($questions); $i++) : ?>
-            <button name="questionNum" type="submit" value=<?= $i + 1 ?>><?= $i + 1 ?></button>
+                <button class="<?= ($_SESSION['userAnswers'][$i] != 0 || $_SESSION['userAnswers'][$i] != '0' ? 'bg-secondary' : 'bg-light ') ?> " name="questionNum" type="submit" value=<?= $i + 1 ?>><?= $i + 1 ?></button>
         <?php endfor; ?>
     </form>
     <section>
-        <button type="submit" onclick="confirmSubmit(<?= array_count_values($_SESSION['userAnswers'])['0'] ?>)">Submit</button>
+        <button type="submit" onclick="confirmSubmit()">Submit</button>
     </section>
     <script>
-        function confirmSubmit(unansweredQuestion) {
-            if (confirm("Apakah anda ingin mensubmit?")) {
-                window.location.href = "scorePage.php"
-            }
-        }
+        // function confirmSubmit() {
+        //     const answers = Array.from(document.querySelectorAll('input[name="answer"]'));
+        //     const questions = <?= json_encode($questions) ?>;
+        //     const userAnswers = <?= json_encode($_SESSION['userAnswers']) ?>;
+        //     const selectedAnswer = answers.filter(answer => answer.checked === true);
+        //     console.log(userAnswers);
+        //     document.write(selectedAnswer);
+        //     if (confirm("Apakah anda ingin mensubmit?")){
+        //         if (userAnswers[questionNum-1] == 0) {
+        //             <?php 
+        //                 $_SESSION['userAnswers'][$questionNum-1] = "<script>document.write(selectedAnswer)</script>";
+        //             ?>
+        //         }
+        //         window.location.href = "scorePage.php"
+        //     }
+        // }
     </script>
 </body>
 
