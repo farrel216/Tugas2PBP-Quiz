@@ -42,7 +42,7 @@
     <title>Quiz</title>
 </head>
 <body>
-    <form action="index.php" method="GET">
+    <form action="questionPage.php" method="GET">
         <section>
             <p>
                 <?= $questions[$questionNum-1]['question'] ?>
@@ -57,18 +57,15 @@
             <?php endforeach; ?>
         </section>
         <section>
-            <?php for($i=0;$i<count($questions);$i++): ?>
-                <a href="?questionNum=<?= $i+1 ?>"><?= $i+1 ?></a>
-            <?php endfor; ?>
-            <button name="questionNum" type="submit" value='<?= ($questionNum != 1) ? $questionNum - 1 : $questionNum?>'>Previous</button>
+            <button name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' <?= ($questionNum == 1 ? 'hidden' : '') ?>>Previous</button>
             
             <?= "Soal ".$questionNum?>
-
+            
             <!-- Debugging -->
             <!-- <h1><?= (int)($questionNum)?></h1> --> 
             <!-- <h1><?= (int)($_GET['questionNum'])?></h1> -->
             
-            <button name="questionNum" type="submit" value='<?= ($questionNum != count($questions)) ? $questionNum + 1 : $questionNum ?>'>Next</button>
+            <button name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' <?= ($questionNum == count($questions) ? 'hidden' : '') ?>>Next</button>
         </section>
 
         <!-- Uncomment untuk debugging jawaban user saat ini -->
@@ -76,9 +73,17 @@
         <h2>
             <?php foreach ($_SESSION['userAnswers'] as $ans):?>
                 <?= $ans ?>
-            <?php endforeach?>
-        </h2> -->
-    </form>
+                <?php endforeach?>
+            </h2> -->
+        </form>
+        <section>
+            <?php for($i=0;$i<count($questions);$i++): ?>
+                <a href="?questionNum=<?= $i+1 ?>"><?= $i+1 ?></a>
+            <?php endfor; ?>
+            <form action="scorePage.php" method="GET">
+                <button type="submit">Submit</button>
+            </form>
+        </section>
 </body>
 </html>
 
