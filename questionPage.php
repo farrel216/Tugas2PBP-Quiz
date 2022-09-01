@@ -30,6 +30,12 @@ if (isset($_GET['answer'])) {
     unset($_GET['answer']);
 }
 
+if (isset($_GET['submit'])) {
+    if ((bool)$_GET['submit']) {
+        header('Location: scorePage.php');
+    }
+}
+
 // Reset session. Tinggal di uncomment, terus next / previous
 // session_destroy();
 ?>
@@ -55,6 +61,7 @@ if (isset($_GET['answer'])) {
             <p>
                 <?= $questions[$questionNum - 1]['question'] ?>
             </p>
+
             <ul class="list-group">
                 <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
                     <li class="list-group-item">
@@ -67,7 +74,7 @@ if (isset($_GET['answer'])) {
                     </li>
                 <?php endforeach; ?>
             </ul>
-            
+
         </section>
         <section>
             <button name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' <?= ($questionNum == 1 ? 'hidden' : '') ?>>Previous</button>
@@ -81,7 +88,7 @@ if (isset($_GET['answer'])) {
             <button name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' <?= ($questionNum == count($questions) ? 'hidden' : '') ?>>Next</button>
 
             <!-- Reset answer -->
-            <a href="?answer=0&questionNum=<?=$questionNum?>">Reset</a>
+            <a href="?answer=0&questionNum=<?= $questionNum ?>">Reset</a>
 
         </section>
 
@@ -101,22 +108,21 @@ if (isset($_GET['answer'])) {
         <button type="submit" onclick="confirmSubmit()">Submit</button>
     </section>
     <script>
-        // function confirmSubmit() {
-        //     const answers = Array.from(document.querySelectorAll('input[name="answer"]'));
-        //     const questions = <?= json_encode($questions) ?>;
-        //     const userAnswers = <?= json_encode($_SESSION['userAnswers']) ?>;
-        //     const selectedAnswer = answers.filter(answer => answer.checked === true);
-        //     console.log(userAnswers);
-        //     document.write(selectedAnswer);
-        //     if (confirm("Apakah anda ingin mensubmit?")){
-        //         if (userAnswers[questionNum-1] == 0) {
-        //             <?php 
-        //                 $_SESSION['userAnswers'][$questionNum-1] = "<script>document.write(selectedAnswer)</script>";
-        //             ?>
-        //         }
-        //         window.location.href = "scorePage.php"
-        //     }
-        // }
+        document.getElementById("submit-btn").addEventListener('click', (e) => {
+            e.preventDefault()
+            if (confirm("Apakah anda ingin mensubmit?")){
+                const radioButtons = document.getElementsByName("answer");
+                let answeredIdx = 0;
+                for (let i = 0; i < radioButtons.length; i++) {
+                    if (radioButtons[i].checked) {
+                        answeredIdx = i+1;
+                        break;
+                    }
+                }
+
+                window.location.href = `questionPage.php?answer=${answeredIdx}&submit=True`
+            }
+        }) 
     </script>
 </body>
 
