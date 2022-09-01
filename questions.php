@@ -1,26 +1,26 @@
 <?php
 $questions = [
     [
-        'question' => '1. What is the capital of Australia?',
+        'question' => 'PHP Merupakan singkatan dari?',
         'answers' => [
             [
                 'id' => 1,
-                'content' => 'Canberra'
+                'content' => 'Private Home Page'
             ],
             [
                 'id' => 2,
-                'content' => 'Sydney'
+                'content' => 'Personal Hypertext Processor'
             ],
             [
                 'id' => 3,
-                'content' => 'Melbourne'
+                'content' => 'PHP: Hypertext Processor'
             ],
             [
                 'id' => 4,
-                'content' => 'Brisbane'
+                'content' => 'Program Hypertext Processor'
             ]
         ],
-        'trueAnswer' => 1
+        'trueAnswer' => 3
     ],
     [
         'question' => '2. What is the capital of New Zealand?',
