@@ -40,24 +40,32 @@ if (isset($_GET['answer'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Quiz - Soal <?=$questionNum?> dari <?=count($questions)?></title>
 </head>
 
-<body>
+<body class="bg-success d-flex flex-column align-items-center justify-content-center">
     <form action="questionPage.php" method="GET">
-        <section>
+        <section class="bg-light">
             <p>
                 <?= $questions[$questionNum - 1]['question'] ?>
             </p>
-
-            <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
-                <input type="radio" name="answer" value="<?= $answer['id'] ?>" <?php 
-                    if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
-                        echo "checked";
-                    } 
-                ?>>
-                <?= $answer['content'] ?>
-            <?php endforeach; ?>
+            <ul class="list-group">
+                <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
+                    <li class="list-group-item">
+                    <input class="" type="radio" name="answer" id="<?= $answer['id'] ?>" value="<?= $answer['id'] ?>" <?php 
+                        if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
+                            echo "checked";
+                        } 
+                    ?>>
+                    <label class="user-select-none" for="<?= $answer['id'] ?>"><?= $answer['content'] ?></label>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            
         </section>
         <section>
             <button name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' <?= ($questionNum == 1 ? 'hidden' : '') ?>>Previous</button>
