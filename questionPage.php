@@ -30,6 +30,12 @@ if (isset($_GET['answer'])) {
     unset($_GET['answer']);
 }
 
+if (isset($_GET['submit'])) {
+    if ((bool)$_GET['submit']) {
+        header('Location: scorePage.php');
+    }
+}
+
 // Reset session. Tinggal di uncomment, terus next / previous
 // session_destroy();
 ?>
@@ -40,7 +46,7 @@ if (isset($_GET['answer'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz - Soal <?=$questionNum?> dari <?=count($questions)?></title>
+    <title>Quiz - Soal <?= $questionNum ?> dari <?= count($questions) ?></title>
 </head>
 
 <body>
@@ -51,11 +57,11 @@ if (isset($_GET['answer'])) {
             </p>
 
             <?php foreach ($questions[$questionNum - 1]['answers'] as $answer) : ?>
-                <input type="radio" name="answer" value="<?= $answer['id'] ?>" <?php 
-                    if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
-                        echo "checked";
-                    } 
-                ?>>
+                <input type="radio" name="answer" value="<?= $answer['id'] ?>" <?php
+                                                                                if ($answer['id'] == $_SESSION['userAnswers'][$questionNum - 1]) {
+                                                                                    echo "checked";
+                                                                                }
+                                                                                ?>>
                 <?= $answer['content'] ?>
             <?php endforeach; ?>
         </section>
@@ -71,7 +77,7 @@ if (isset($_GET['answer'])) {
             <button name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' <?= ($questionNum == count($questions) ? 'hidden' : '') ?>>Next</button>
 
             <!-- Reset answer -->
-            <a href="?answer=0&questionNum=<?=$questionNum?>">Reset</a>
+            <a href="?answer=0&questionNum=<?= $questionNum ?>">Reset</a>
 
         </section>
 
@@ -86,16 +92,41 @@ if (isset($_GET['answer'])) {
         <?php for ($i = 0; $i < count($questions); $i++) : ?>
             <button name="questionNum" type="submit" value=<?= $i + 1 ?>><?= $i + 1 ?></button>
         <?php endfor; ?>
+        <button type="submit" id="submit-btn">Submit</button>
     </form>
-    <section>
-        <button type="submit" onclick="confirmSubmit(<?= array_count_values($_SESSION['userAnswers'])['0'] ?>)">Submit</button>
-    </section>
     <script>
-        function confirmSubmit(unansweredQuestion) {
-            if (confirm("Apakah anda ingin mensubmit?")) {
-                window.location.href = "scorePage.php"
+        // function confirmSubmit(questionNum) {
+        //     const answers = Array.from(document.querySelectorAll('input[name="answer"]'));
+        //     const questions = <?= json_encode($questions) ?>;
+        //     const userAnswers = <?= json_encode($_SESSION['userAnswers']) ?>;
+        //     const selectedAnswer = answers.filter(answer => answer.checked === true);
+        //     console.log(userAnswers);
+        //     document.write(selectedAnswer);
+        //     if (confirm("Apakah anda ingin mensubmit?")){
+        //         if (userAnswers[questionNum-1] == 0) {
+        //             <?php 
+        //                 $_SESSION['userAnswers'][$questionNum-1] = "<script>document.write(selectedAnswer)</script>";
+        //             ?>
+        //             window.location.href = "scorePage.php"
+        //         }
+        //     }
+        // }
+        
+        document.getElementById("submit-btn").addEventListener('click', (e) => {
+            e.preventDefault()
+            if (confirm("Apakah anda ingin mensubmit?")){
+                const radioButtons = document.getElementsByName("answer");
+                let answeredIdx = 0;
+                for (let i = 0; i < radioButtons.length; i++) {
+                    if (radioButtons[i].checked) {
+                        answeredIdx = i+1;
+                        break;
+                    }
+                }
+
+                window.location.href = `questionPage.php?answer=${answeredIdx}&submit=True`
             }
-        }
+        }) 
     </script>
 </body>
 
