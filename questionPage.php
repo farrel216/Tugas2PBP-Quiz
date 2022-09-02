@@ -132,6 +132,19 @@ if (isset($_GET['submit'])) {
             let hour = Math.floor(remainingSeconds / 3600)
             let minute = Math.floor(remainingSeconds % 3600 / 60)
             let second = Math.floor(remainingSeconds % 3600 % 60)
+
+            if(hour === 0 && minute === 0 && second === 0) {
+                const radioButtons = document.getElementsByName("answer");
+                let answeredIdx = 0;
+                for (let i = 0; i < radioButtons.length; i++) {
+                    if (radioButtons[i].checked) {
+                        answeredIdx = i + 1;
+                        break;
+                    }
+                }
+
+                window.location.href = `questionPage.php?answer=${answeredIdx}&submit=True`
+            }
             
             timer.innerHTML = `${(hour < 10 ? '0' : '') + hour}:${(minute < 10 ? '0' : '') + minute}:${(second < 10 ? '0' : '') + second}`
         }

@@ -1,6 +1,6 @@
 <?php
 // Variabel time limit untuk membatasi lama kuis
-$timeLimitSec = 120 * 60;
+$timeLimitSec = 5 * 60;
 
 /* Pertanyaan dan jawabannya. Dalam bentuk 
    array of [
