@@ -1,5 +1,16 @@
 <?php
+// Variabel time limit untuk membatasi lama kuis
 $timeLimitSec = 120 * 60;
+
+/* Pertanyaan dan jawabannya. Dalam bentuk 
+   array of [
+        assosiative array of [
+            questions: string,
+            answers: assosiative array of [id: integer, content: string],
+            trueAnswer: integer 
+        ]
+   ]
+*/
 $questions = [
     [
         'question' => 'PHP Merupakan singkatan dari?',

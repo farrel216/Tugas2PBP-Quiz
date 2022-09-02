@@ -1,6 +1,9 @@
 <?php
-// Ngga bisa nyimpen jawaban di array questions karena arraynya bakal ke reset lagi (userAnswers berubah lagi jadi 0)
-// Solusi: pakai session array, yang merupakan global variabel (tidak akan berubah ketika file direfresh)
+/* Super global variabel session merupakan variabel yang digunakan untuk menyimpan 
+   variabel-variabel penting yang digunakan oleh semua page dalam satu session.
+   Session dibuat dengan menggunakan session_start(). Variabel session dapat diakses
+   dengan menggunakan $_SESSION[<string_key_atau_nama_variabel>]
+*/
 session_start();
 require("questions.php");
 
@@ -90,26 +93,17 @@ if (isset($_GET['submit'])) {
                     <?php endfor; ?>
                 </nav>
                 <section class="d-flex flex-column align-items-center">
+                    
                     <button class="btn btn-lg btn-primary my-3" type="submit" id="submit-btn">Submit</button>
 
-            <!-- Timer -->
-            <div id="timer"></div>
+                    <!-- Timer -->
+                    <div id="timer"></div>
                     <div class="d-flex">
                         <button style="visibility: <?= ($questionNum == 1 ? 'hidden' : 'visible') ?>" class="btn btn-warning  me-2 <?= ($questionNum == 1 ? 'hidden' : '') ?>" name="questionNum" type="submit" value='<?= $questionNum - 1 ?>' >Previous</button>
                         <button style="visibility: <?= ($questionNum == count($questions) ? 'hidden' : 'visible') ?>" class="btn btn-warning" name="questionNum" type="submit" value='<?= $questionNum + 1 ?>' >Next</button>
                     </div>
                 </section>
-
-                <!-- Uncomment untuk debugging jawaban user saat ini -->
-                <!-- <h1>Jawaban user:</h1>
-        <h2>
-            <?php foreach ($_SESSION['userAnswers'] as $ans) : ?>
-                <?= $ans ?>
-            <?php endforeach ?>
-        </h2> -->
             </div>
-
-
         </section>
     </form>
     <script>
