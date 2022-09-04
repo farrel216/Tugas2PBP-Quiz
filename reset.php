@@ -1,7 +1,7 @@
 <?= 
+// Reset session menggunakan session_destroy()
 session_start();
 session_destroy();
-
 ?>
 
 <script>

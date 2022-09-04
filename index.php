@@ -1,7 +1,7 @@
 <?php 
+// Reset session terlebih dahulu agar session sebelumnya hilang
 session_start();
 session_destroy();
-
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +28,7 @@ session_destroy();
 </head>
 <body class="bg-success d-flex flex-column align-items-center justify-content-center">
     <h1 class="text-light">Kuis 2 - PHP</h1>
-    <button type="button" class="btn btn-primary btn-lg"><a class="nav-link" href="questionPage.php">Start</a></button>
+    <!-- Navigasi ke halaman pertama kuis -->
+    <button type="button" class="btn btn-primary btn-lg"><a class="nav-link" href="questionPage.php?questionNum=1">Start</a></button>
 </body>
 </html>
