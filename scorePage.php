@@ -2,6 +2,8 @@
     session_start();
     require("questions.php");
 
+    // Menghitung jumlah jawaban yang benar dengan mencocokan jawaban user (SESSION['userAnswers])
+    // dengan jawaban asli (questions[i][trueAnswer])
     $correctAnswer = 0;
     for ($i = 0; $i < count($_SESSION['userAnswers']); $i++) {
         if ($_SESSION['userAnswers'][$i] == $questions[$i]['trueAnswer']) {
@@ -33,9 +35,11 @@
     </style>
 </head>
 <body class="bg-success d-flex flex-column align-items-center justify-content-center">
+    <!-- Tampilan jumlah jawaban benar -->
     <h1 class="text-light">Selamat!!!</h1>
     <h2 class="text-light">Kamu telah menjawab benar <?=$correctAnswer?> dari <?=count($questions)?></h2>
     <div class="d-flex align-items-center mt-2">
+        <!-- Navigasi ke homepage -->
         <a href="index.php" class="btn btn-light btn-lg me-3">Kembali ke halaman utama</a>
         <!-- Play Again Button -->
         <button type="button" class="btn btn-primary btn-lg"><a class="nav-link text-light" href="questionPage.php"><a class="nav-link" href="reset.php">Play Again</a></button>

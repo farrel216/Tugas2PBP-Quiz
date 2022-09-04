@@ -39,7 +39,7 @@ $questions = [
         'answers' => [
             [
                 'id' => 1,
-                'content' => '&lt;?php> ... &lt;/?php&gt;'
+                'content' => '&lt;?php> .&lt;/?php&gt;'
             ],
             [
                 'id' => 2,
@@ -57,7 +57,7 @@ $questions = [
         'trueAnswer' => 3
     ],
     [
-        'question' => '3. Sintak untuk mencetak output "Hello World" di PHP?',
+        'question' => 'Sintak untuk mencetak output "Hello World" di PHP?',
         'answers' => [
             [
                 'id' => 1,
@@ -79,7 +79,7 @@ $questions = [
         'trueAnswer' => 4
     ],
     [
-        'question' => '4. Setiap variabel di PHP diawali dengan simbol?',
+        'question' => 'Setiap variabel di PHP diawali dengan simbol?',
         'answers' => [
             [
                 'id' => 1,
@@ -101,7 +101,7 @@ $questions = [
         'trueAnswer' => 2
     ],
     [
-        'question' => '5. Setiap perintah dalam PHP diakhiri dengan tanda?',
+        'question' => 'Setiap perintah dalam PHP diakhiri dengan tanda?',
         'answers' => [
             [
                 'id' => 1,
@@ -123,7 +123,7 @@ $questions = [
         'trueAnswer' => 2
     ],
     [
-        'question' => '6. Untuk membuat komentar di PHP menggunakan tanda?',
+        'question' => 'Untuk membuat komentar di PHP menggunakan tanda?',
         'answers' => [
             [
                 'id' => 1,
@@ -145,7 +145,7 @@ $questions = [
         'trueAnswer' => 1
     ],
     [
-        'question' => '7. Tipe data integer di PHP digunakan untuk data?',
+        'question' => 'Tipe data integer di PHP digunakan untuk data?',
         'answers' => [
             [
                 'id' => 1,
@@ -167,7 +167,7 @@ $questions = [
         'trueAnswer' => 1
     ],
     [
-        'question' => '8. "Tipe data Boolean hanya memiliki nilai true dan false!" Pernyataan ini...',
+        'question' => '"Tipe data Boolean hanya memiliki nilai true dan false!" Pernyataan ini...',
         'answers' => [
             [
                 'id' => 1,
@@ -189,7 +189,7 @@ $questions = [
         'trueAnswer' => 1
     ],
     [
-        'question' => '9. Operator aritmatika digunakan untuk melakukan operasi?',
+        'question' => 'Operator aritmatika digunakan untuk melakukan operasi?',
         'answers' => [
             [
                 'id' => 1,
@@ -211,7 +211,7 @@ $questions = [
         'trueAnswer' => 1
     ],
     [
-        'question' => '10. Berikut ini contoh operator aritmatika, kecuali',
+        'question' => '1Berikut ini contoh operator aritmatika, kecuali',
         'answers' => [
             [
                 'id' => 1,
